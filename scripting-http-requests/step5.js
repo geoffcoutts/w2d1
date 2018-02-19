@@ -2,10 +2,10 @@
 //and keep it in a buffer until all data is ready to be displayed.
 //exported as a module.
 
+
+function getHTML (requestOptions, callBack) {
+
 var https = require("https");
-
-module.exports = function getHTML (requestOptions, callBack) {
-
 
   https.get(requestOptions, function (response) {
 
@@ -27,18 +27,25 @@ module.exports = function getHTML (requestOptions, callBack) {
       callBack(output);
     });
   });
+}
+
+var inputURL = process.argv.slice(2, 4);
+
+var requestOptions = {
+  host: inputURL[0].toString(),
+  path: inputURL[1].toString()
 };
 
-// var inputURL = process.argv.slice(2, 4);
+function printHTML (html) {
+  console.log(html);
+}
 
-// var requestOptions = {
-//   host: inputURL[0].toString(),
-//   path: inputURL[1].toString()
-// };
-
-// function printHTML (html) {
-//   console.log(html);
-// }
+module.exports = {
+  getHTML: getHTML,
+  inputURL: inputURL,
+  requestOptions: requestOptions,
+  printHTML: printHTML
+};
 
 // getHTML(requestOptions, printHTML);
 
