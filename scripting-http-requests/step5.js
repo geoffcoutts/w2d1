@@ -4,7 +4,7 @@
 
 
 function getHTML (requestOptions, callBack) {
-
+// var Casing = require('');
 var https = require("https");
 
   https.get(requestOptions, function (response) {
@@ -24,7 +24,7 @@ var https = require("https");
     // the callback is invoked when all of the data has been received
     // (the `end` of the stream)
     response.on('end', function () {
-      callBack(output);
+      console.log(callBack(output));
     });
   });
 }
@@ -37,7 +37,7 @@ var requestOptions = {
 };
 
 function printHTML (html) {
-  console.log(html);
+  return html;
 }
 
 module.exports = {
