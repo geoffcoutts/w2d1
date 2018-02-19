@@ -1,14 +1,10 @@
-//Function to get chunks of data from a hardcoded website
+//Function to get chunks of data from a given website
 //and keep it in a buffer until all data is ready to be displayed.
 
 var https = require("https");
 
-function getAndPrintHTML () {
+function getAndPrintHTML (requestOptions) {
 
-  var requestOptions = {
-    host: 'sytantris.github.io',
-    path: '/http-examples/step1.html'
-  };
 
   https.get(requestOptions, function (response) {
 
@@ -32,4 +28,12 @@ function getAndPrintHTML () {
   });
 }
 
-getAndPrintHTML();
+var inputURL = process.argv.slice(2, 4);
+
+var requestOptions = {
+  host: inputURL[0].toString(),
+  path: inputURL[1].toString()
+};
+
+
+getAndPrintHTML(requestOptions);
