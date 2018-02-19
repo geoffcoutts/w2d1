@@ -1,9 +1,9 @@
-// Get chunks of data from a given website
-// and output the chunk lengths and total
+//Function to get chunks of data from a website
+//and keep it in a buffer until all data is ready to be displayed.
 
 var https = require("https");
 
-function getAndPrintHTMLChunks () {
+function getAndPrintHTML () {
 
   var requestOptions = {
     host: 'sytantris.github.io',
@@ -15,17 +15,21 @@ function getAndPrintHTMLChunks () {
     // set encoding of received data to UTF-8
     response.setEncoding('utf8');
 
+    var output = "";
+
     // the callback is invoked when a `data` chunk is received
     response.on('data', function (data) {
       console.log('Chunk Received, Length:', data.length);
+
+      output += data;
     });
 
     // the callback is invoked when all of the data has been received
     // (the `end` of the stream)
     response.on('end', function() {
-      console.log('Response stream complete.');
+      console.log(output);
     });
   });
 }
 
-getAndPrintHTMLChunks();
+getAndPrintHTML();
